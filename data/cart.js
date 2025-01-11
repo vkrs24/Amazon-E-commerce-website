@@ -1,4 +1,4 @@
-export const cart = [
+export let cart = [
   {
     productID: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     quantity: 2,
@@ -52,4 +52,15 @@ export function addtocart(productId, cart) {
   }, 2000);
 
   addedMessageTimeouts[productId] = timeoutId;
+}
+
+export function removecart(productID) {
+  const new_cart = [];
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productID !== productID) {
+      new_cart.push(cartItem);
+    }
+  });
+  cart = new_cart;
 }
