@@ -12,8 +12,8 @@ cart.forEach((cartItem) => {
     if (product.id === productId) {
       matchingProduct = product;
     }
-  });
-  cartSummaryHTML += `
+
+    cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${
       matchingProduct.id
     }">
@@ -95,6 +95,7 @@ cart.forEach((cartItem) => {
           </div>
         </div>
     `;
+  });
 });
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 

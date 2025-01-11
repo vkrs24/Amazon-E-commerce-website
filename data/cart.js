@@ -1,21 +1,38 @@
-export let cart = [
-  {
-    productID: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity: 2,
-  },
-  {
-    productID: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity: 3,
-  },
-];
+export let cart = JSON.parse(localStorage.getItem("cart"));
+if (!cart) {
+  cart = [
+    {
+      productID: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 2,
+    },
+    {
+      productID: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      quantity: 3,
+    },
+  ];
+}
 
+export function savetostorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+export function removecart(productID) {
+  const new_cart = [];
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productID !== productID) {
+      new_cart.push(cartItem);
+    }
+  });
+  cart = new_cart;
+  savetostorage();
+}
 export function addtocart(productId, cart) {
   const addedMessageTimeouts = {};
   let matchingitem;
 
-  cart.forEach((item) => {
-    if (productId === item.productId) {
-      matchingitem = item;
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingitem = cartItem;
     }
   });
 
@@ -47,20 +64,10 @@ export function addtocart(productId, cart) {
     clearTimeout(previousTimeoutId);
   }
 
-  setTimeout(() => {
+  const timeoutId = setTimeout(() => {
     addedMessage.classList.remove("added-to-cart-visible");
   }, 2000);
 
   addedMessageTimeouts[productId] = timeoutId;
-}
-
-export function removecart(productID) {
-  const new_cart = [];
-
-  cart.forEach((cartItem) => {
-    if (cartItem.productID !== productID) {
-      new_cart.push(cartItem);
-    }
-  });
-  cart = new_cart;
+  savetostorage();
 }
