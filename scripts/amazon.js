@@ -63,7 +63,6 @@ document.querySelector(".js-product-grid").innerHTML = productHtml;
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const { productId } = button.dataset;
-    console.log(productId);
     addtocart(productId, cart);
   });
 });
