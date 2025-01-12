@@ -1,4 +1,4 @@
-import { cart, addtocart } from "../data/cart.js";
+import { cart, addtocart, updatecart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utiles/money.js";
 
@@ -64,5 +64,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const { productId } = button.dataset;
     addtocart(productId, cart);
+    updatecart();
   });
 });
