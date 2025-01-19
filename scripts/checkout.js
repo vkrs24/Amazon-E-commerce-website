@@ -13,6 +13,14 @@ cart.forEach((cartItem) => {
   const productId = cartItem.productID;
   const matchingProduct = products.find((product) => product.id === productId);
 
+  const deliveryOptionId = cartItem.deliveryOptionId;
+  let deliveryOption;
+  deliveryoptionsId.forEach((option) => {
+    if (option.id === deliveryOptionId) {
+      deliveryOption = option;
+    }
+  });
+
   if (matchingProduct) {
     cartSummaryHTML += `
 <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
